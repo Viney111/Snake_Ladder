@@ -19,6 +19,7 @@ namespace Game
             //VARIABLES
             int position1 = 0;
             Random random = new Random();
+            int counterDieRoll = 0;
             
             while (position1 != TARGETPOSITION)
             {
@@ -31,22 +32,23 @@ namespace Game
                 {
                     case SNAKE:
                         position1 -= dieRoll;
-                        int output1 = position1 < 0? position1 +=dieRoll: position1;
-                        Console.WriteLine("Position1 decremented");
+                        int output1 = position1 < 0 ? position1 += dieRoll : position1;
+                        Console.WriteLine($"Player is at {position1}");
                         break;
                     case LADDER:
                         position1 += dieRoll;
-                        Console.WriteLine("Position1 Incremented");
                         //For decrementing if player crosses 100 position.
-                        int output2 = position1 > 100 ? position1 -= dieRoll : position1;
+                        int output2 = position1 > TARGETPOSITION ? position1 -= dieRoll : position1;
+                        Console.WriteLine($"Player is at {position1}");
                         break;
                     default:
                         position1 += 0;
                         Console.WriteLine("NOT PLAY");
                         break;
                 }
+            counterDieRoll++;
             }
-            Console.WriteLine($"Game over ! Player is at exact {position1}");
+            Console.WriteLine($"Game over ! Player is at exact {position1}.\nTotal number of die roll is {counterDieRoll}.");
         }
     }
 }
