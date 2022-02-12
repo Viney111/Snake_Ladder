@@ -14,27 +14,37 @@ namespace Game
             //CONSTANTS
             const int SNAKE = 1;
             const int LADDER = 2;
+            const int TARGETPOSITION = 100;
 
             //VARIABLES
             int position1 = 0;
             Random random = new Random();
-            int dieRoll = random.Next(1, 7);
-            int chooseOption = random.Next(0,3);
-
-            switch (chooseOption)
+            
+            while (position1 <= TARGETPOSITION)
             {
-                case SNAKE:
-                    position1 -= dieRoll;
-                    break;
-                case LADDER:
-                    position1 += dieRoll;
-                    break;
-                default:
-                    position1 +=0;
-                    Console.WriteLine("NOT PLAY");
-                    break;
+                //VARIABLES
+
+                int dieRoll = random.Next(1, 7);
+                int chooseOption = random.Next(0, 3);
+
+                switch (chooseOption)
+                {
+                    case SNAKE:
+                        position1 -= dieRoll;
+                        int output = position1 < 0? position1 +=dieRoll: position1;
+                        Console.WriteLine("Position1 decremented");
+                        break;
+                    case LADDER:
+                        position1 += dieRoll;
+                        Console.WriteLine("Position1 Incremented");
+                        break;
+                    default:
+                        position1 += 0;
+                        Console.WriteLine("NOT PLAY");
+                        break;
+                }
             }
-            Console.WriteLine($"Player is at {position1}");
+            Console.WriteLine($"Game over ! Player is at {position1}");
         }
     }
 }
