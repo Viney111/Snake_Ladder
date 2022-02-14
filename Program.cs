@@ -14,8 +14,6 @@ namespace Game
         const int TARGETPOSITION = 100;
         public static int Getposition(int position)
         {
-            StartAgain:
-
             //VARIABLES
             Random random = new Random();
             int chooseOption = random.Next(0, 3);
@@ -25,15 +23,15 @@ namespace Game
             {
                 case SNAKE:
                     position -= dieRoll;
-                    int output1 = position < 0 ? position += dieRoll : position;
+                    position = position < 0 ? position += dieRoll : position;
                     break;
                 case LADDER:
                     position += dieRoll;
-                    Console.WriteLine("Ladder wons");
                     //For decrementing if player crosses 100 position.
-                    int output2 = position > TARGETPOSITION ? position -= dieRoll : position;
+                    position = position > TARGETPOSITION ? position -= dieRoll : position;
                     //For playing again, if player got at ladder
-                    goto StartAgain;
+                    Getposition(position);
+                    break;
                 default:
                     position += 0;
                     Console.WriteLine("NOT PLAYED");
@@ -53,13 +51,10 @@ namespace Game
             {
                 player1Position = Getposition(player1Position);
                 player2Position = Getposition(player2Position);
-                Console.WriteLine($"PLAYER1 IS AT {player1Position}");
-                Console.WriteLine($"PLAYER2 IS AT {player2Position}");
+                Console.WriteLine($"PLAYER1 IS AT {player1Position} & PLAYER2 IS AT {player2Position}");
             }
             string result = player1Position == TARGETPOSITION ? ("Player1 Won the game") : ("Player2 won the game");
-            Console.WriteLine(result);
-            
-            
+            Console.WriteLine(result);                    
         }
     }
 }
